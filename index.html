@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Back to Being × Wispr — Partnership Proposal</title>
+<meta name="description" content="Technology should make us more human. A partnership proposal for Wispr." />
+<link rel="icon" type="image/svg+xml" href="favicon.svg" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --canvas:#FFFEF1; --ink:#2A3723; --grass:#97A081; --sand:#B9A26E;
+    --sky:#A7BDD5; --creek:#424D69; --muted:#8b9183; --bodyink:#4d564a;
+    --serif:'Instrument Serif', Georgia, serif;
+    --sans:'Inter', system-ui, sans-serif;
+    --pad: clamp(40px, 8vw, 150px);
+    --maxw: 900px;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html,body{height:100%;}
+  body{ font-family:var(--sans); color:var(--ink); background:var(--ink); overflow:hidden; -webkit-font-smoothing:antialiased; }
+
+  #track{display:flex; height:100vh; width:100vw; transition:transform .7s cubic-bezier(.65,0,.2,1);}
+  .slide{ position:relative; min-width:100vw; height:100vh; overflow:hidden;
+    display:flex; flex-direction:column; justify-content:center; padding:var(--pad); background:var(--canvas); }
+  .slide .inner{width:100%; max-width:var(--maxw); margin:0 auto;}
+
+  .eyebrow{ font-family:var(--sans); font-weight:400; font-size:clamp(13px,1.05vw,15px);
+    letter-spacing:.02em; color:var(--muted); margin-bottom:clamp(20px,2.8vw,30px); }
+  h1,h2{ font-family:var(--serif); font-weight:400; line-height:1.04; letter-spacing:-.01em;
+    color:var(--ink); font-size:clamp(40px,5.8vw,82px); }
+  h1.xl,h2.xl{font-size:clamp(46px,6.8vw,94px);}
+  .it{font-style:italic; color:var(--grass);}
+  .lead{ font-family:var(--sans); font-weight:400; line-height:1.6; color:var(--bodyink);
+    font-size:clamp(18px,1.65vw,22px); max-width:50ch; margin-top:clamp(18px,2.2vw,28px); }
+  .lead .em{color:var(--ink); font-weight:500;}
+
+  .slide.dark{background:var(--creek); color:var(--canvas);}
+  .slide.tree{background:var(--ink);}
+  .slide.dark h1,.slide.dark h2{color:var(--canvas);}
+  .slide.dark .it{color:var(--sky);}
+  .slide.tree .it{color:var(--sand);}
+  .slide.dark .eyebrow{color:rgba(255,254,241,.6);}
+  .slide.dark .lead{color:rgba(255,254,241,.8);}
+  .slide.dark .lead .em{color:#fff;}
+
+  .slide.cover{text-align:center;}
+  .slide.cover .inner{max-width:800px;}
+  .cover-mark{width:clamp(78px,9vw,116px); color:var(--grass); margin:0 auto clamp(22px,2.6vw,32px);}
+  .wordmark{font-family:var(--sans); font-weight:500; font-size:clamp(15px,1.5vw,19px); letter-spacing:.06em; color:var(--grass); text-transform:lowercase; margin-bottom:clamp(26px,3.4vw,46px);}
+  .cover h1{font-size:clamp(44px,6.6vw,92px);}
+  .cover .eyebrow{margin:clamp(24px,3vw,36px) 0 0; color:var(--muted);}
+  .cover-meta{font-family:var(--sans); font-size:clamp(12px,1.1vw,14px); color:var(--muted); letter-spacing:.03em; margin-top:14px;}
+
+  /* from / to visual */
+  .shift{display:flex; align-items:center; gap:clamp(12px,1.8vw,24px); margin-top:clamp(40px,5vw,64px); max-width:600px;}
+  .shift-node{display:flex; flex-direction:column; gap:6px;}
+  .shift-node .big{font-family:var(--serif); font-size:clamp(24px,2.6vw,34px); line-height:1; color:rgba(255,254,241,.78);}
+  .shift-node .lb{font-family:var(--sans); font-size:clamp(12px,1.1vw,14px); color:rgba(255,254,241,.5);}
+  .shift-node.now{text-align:right;}
+  .shift-node.now .big{color:var(--sky);}
+  .shift-node.now .lb{color:rgba(167,189,213,.8);}
+  .shift-line{flex:1; height:1px; background:rgba(255,254,241,.28);}
+  .shift-arr{width:18px; height:18px; color:var(--sky); margin:0 -8px 0 -16px; flex:none;}
+
+  .rows{ display:grid; grid-template-columns:repeat(3,1fr); margin-top:clamp(34px,4.5vw,54px);
+    border-top:.5px solid rgba(42,55,35,.2); }
+  .rows .col{ padding:clamp(18px,1.8vw,24px) clamp(20px,2vw,28px) 4px 0; }
+  .rows .col + .col{ border-left:.5px solid rgba(42,55,35,.2); padding-left:clamp(20px,2vw,28px); }
+  .rows .k{ font-family:var(--sans); font-weight:500; font-size:clamp(15px,1.35vw,18px); color:var(--ink); }
+  .rows .v{ font-family:var(--sans); font-weight:400; font-size:clamp(14px,1.2vw,16px); color:var(--muted); margin-top:6px; line-height:1.45; }
+  .slide.dark .rows{border-color:rgba(255,254,241,.22);}
+  .slide.dark .rows .col + .col{border-color:rgba(255,254,241,.22);}
+  .slide.dark .rows .k{color:var(--canvas);}
+  .slide.dark .rows .v{color:rgba(255,254,241,.62);}
+
+  .kicker{ font-family:var(--serif); font-style:italic; font-size:clamp(20px,2vw,28px); color:var(--sand); margin-top:clamp(26px,3.2vw,40px); }
+  .slide:not(.dark) .kicker{color:var(--grass);}
+
+  .route{width:100%; max-width:760px; margin-top:clamp(34px,4.4vw,56px); height:auto; display:block;}
+
+  .duo{ display:grid; grid-template-columns:1fr 1fr; gap:clamp(28px,4vw,64px); margin-top:clamp(30px,3.6vw,46px); }
+  .duo .blk{ border-top:.5px solid rgba(42,55,35,.2); padding-top:clamp(14px,1.5vw,18px); }
+  .duo .lbl{ font-family:var(--sans); font-weight:500; font-size:clamp(17px,1.7vw,22px); color:var(--ink); margin-bottom:12px; letter-spacing:-.01em; }
+  .slide.dark .duo .lbl{ color:var(--canvas); }
+  .duo .txt{ font-family:var(--sans); font-weight:400; font-size:clamp(15px,1.3vw,18px); line-height:1.55; color:var(--bodyink); }
+
+  .links{ display:flex; flex-wrap:wrap; gap:clamp(14px,2vw,30px); margin-top:clamp(26px,3.2vw,40px); }
+  .links a{ font-family:var(--sans); font-weight:400; font-size:clamp(15px,1.4vw,19px); color:var(--canvas);
+    text-decoration:none; border-bottom:.5px solid rgba(255,254,241,.45); padding-bottom:3px; }
+  .links a.lead-link{color:var(--sand); border-color:var(--sand);}
+
+  .brandlock{display:inline-flex; align-items:center; gap:.5em; color:var(--grass);}
+  .brandlock svg{width:clamp(28px,2.8vw,38px); height:auto;}
+  .brandlock .wm{font-family:var(--sans); font-weight:500; font-size:clamp(15px,1.4vw,19px); letter-spacing:.01em; color:var(--grass);}
+  .slide.dark .brandlock,.slide.dark .brandlock .wm{color:var(--canvas);}
+
+  .mark{position:absolute; top:var(--pad); left:var(--pad); display:inline-flex; align-items:center; gap:.45em; color:var(--grass);}
+  .mark svg{width:20px; height:auto;}
+  .mark span{font-family:var(--sans); font-weight:400; font-size:13px; color:var(--muted); letter-spacing:.01em;}
+  .slide.dark .mark{color:var(--canvas);}
+  .slide.dark .mark span{color:rgba(255,254,241,.6);}
+
+  #progresswrap{position:fixed; top:0; left:0; right:0; height:3px; background:rgba(42,55,35,.08); z-index:50;}
+  #progress{height:100%; width:0; background:var(--grass); transition:width .6s cubic-bezier(.65,0,.2,1);}
+  .nav{position:fixed; bottom:26px; left:50%; transform:translateX(-50%); z-index:50; display:flex; gap:8px;}
+  .nav button{ width:42px; height:42px; border-radius:50%; border:.5px solid rgba(42,55,35,.22);
+    background:transparent; cursor:pointer; color:var(--ink); display:grid; place-items:center; transition:.2s; font-size:0;}
+  .nav button:hover{background:var(--ink); color:var(--canvas); border-color:var(--ink);}
+  .nav button:disabled{opacity:.25; cursor:default;}
+  .nav button svg{width:17px; height:17px;}
+  #counter{position:fixed; bottom:33px; right:30px; z-index:50; font-family:var(--sans); font-size:13px; letter-spacing:.06em; color:var(--muted);}
+
+  #intro{position:fixed; inset:0; z-index:200; background:var(--canvas); display:flex; align-items:center; justify-content:center; transition:opacity .6s ease;}
+  #intro.hide{opacity:0; pointer-events:none;}
+  #introAnim{width:min(82vw,780px); aspect-ratio:16/9;}
+
+  .reveal>*{opacity:0; transform:translateY(14px); transition:opacity .8s ease, transform .8s cubic-bezier(.2,.7,.2,1);}
+  .slide.active .reveal>*{opacity:1; transform:none;}
+  .slide.active .reveal>*:nth-child(1){transition-delay:.06s;}
+  .slide.active .reveal>*:nth-child(2){transition-delay:.16s;}
+  .slide.active .reveal>*:nth-child(3){transition-delay:.26s;}
+  .slide.active .reveal>*:nth-child(4){transition-delay:.36s;}
+  .slide.active .reveal>*:nth-child(5){transition-delay:.46s;}
+
+  @media (max-width:720px){
+    .rows{grid-template-columns:1fr; border-top:none;}
+    .rows .col{border-top:.5px solid rgba(42,55,35,.18); padding:16px 0 8px;}
+    .rows .col + .col{border-left:none;}
+    .slide.dark .rows .col{border-color:rgba(255,254,241,.2);}
+    .duo{grid-template-columns:1fr; gap:24px;}
+    .mark{display:none;}
+  }
+  @media print{
+    @page{size:1280px 720px; margin:0;}
+    body{overflow:visible; background:#fff;}
+    #track{display:block; transform:none!important; height:auto; width:auto;}
+    .slide{height:720px; width:1280px; page-break-after:always; break-after:page;}
+    .reveal>*{opacity:1!important; transform:none!important;}
+    #progresswrap,.nav,#counter{display:none!important;}
+  }
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="logomark" viewBox="0 0 970.79 511.74">
+    <polygon fill="currentColor" points="970.79 413.54 613.32 510.85 590.43 471.25 575.75 445.83 565.01 427.21 550.52 402.1 538.82 381.82 527.25 361.8 498.14 311.46 485.68 289.91 470.68 315.91 443.73 362.63 432.54 381.95 420.66 402.42 407.31 425.62 406.23 427.52 395.3 446.4 380.93 471.32 357.6 511.74 0 417.42 29.49 305.67 291.88 374.83 99.22 183.76 180.58 101.7 373.18 292.71 301.99 30.96 413.48 .64 484.79 262.45 553.95 0 665.69 29.49 596.54 292.01 787.67 99.29 869.73 180.65 678.53 373.37 940.35 302.05 970.79 413.54"/>
+  </symbol>
+  <symbol id="arrowR" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M13 6l6 6-6 6"/></symbol>
+  <symbol id="arrowL" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M19 12H5M11 6l-6 6 6 6"/></symbol>
+</svg>
+
+<div id="intro"><div id="introAnim"></div></div>
+
+<div id="progresswrap"><div id="progress"></div></div>
+
+<div id="track">
+
+  <!-- 1 · COVER -->
+  <section class="slide cover">
+    <div class="inner reveal">
+      <svg class="cover-mark" viewBox="0 0 970.79 511.74"><use href="#logomark"/></svg>
+      <div class="wordmark">back to being</div>
+      <h1>Technology should make us <span class="it">more human.</span></h1>
+      <div class="eyebrow" style="margin-bottom:0;">A partnership proposal for Wispr</div>
+      <div class="cover-meta">Summer 2026 · backtobeing.tech</div>
+    </div>
+  </section>
+
+  <!-- 2 · OUR VISION -->
+  <section class="slide dark">
+    <div class="mark"><svg viewBox="0 0 970.79 511.74"><use href="#logomark"/></svg><span>back to being</span></div>
+    <div class="inner reveal">
+      <div class="eyebrow">Our vision</div>
+      <h2 class="xl">Being busy isn't being <span class="it">present.</span></h2>
+      <p class="lead">Our generation grew up always on: always behind, never quite here. We think the real shift, the one worth betting on, is back toward presence. <span class="em">Technology that gives our attention back, not takes more of it.</span></p>
+      <div class="shift">
+        <div class="shift-node"><span class="big">always on</span><span class="lb">the default today</span></div>
+        <span class="shift-line"></span>
+        <svg class="shift-arr" viewBox="0 0 24 24"><use href="#arrowR"/></svg>
+        <div class="shift-node now"><span class="big">present</span><span class="lb">where we're headed</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 · WHAT WE DO -->
+  <section class="slide">
+    <div class="mark"><svg viewBox="0 0 970.79 511.74"><use href="#logomark"/></svg><span>back to being</span></div>
+    <div class="inner reveal">
+      <div class="eyebrow">What we do</div>
+      <h2>The world as <span class="it">our office.</span></h2>
+      <p class="lead">We're Caesar, Stijn and Max, three founders in our twenties. We build like everyone our age: heads down, screens on. This summer we do it differently. We walk 120 km of the Camino and build as we go, <span class="em">using Wispr to work by voice so we stay present, not buried in a screen.</span></p>
+      <svg class="route" viewBox="0 0 920 108" role="img" aria-label="Route from Tui, Portugal to Santiago, Spain, 120 km over 6 days">
+        <text x="460" y="20" text-anchor="middle" fill="#B9A26E" font-family="Inter, sans-serif" font-size="14" font-weight="500" letter-spacing="1.5">120 km · 6 days</text>
+        <line x1="74" y1="58" x2="846" y2="58" stroke="#97A081" stroke-opacity="0.5" stroke-width="1.5" stroke-dasharray="1.5 8" stroke-linecap="round"/>
+        <circle cx="333" cy="58" r="3" fill="#97A081" fill-opacity="0.55"/>
+        <circle cx="587" cy="58" r="3" fill="#97A081" fill-opacity="0.55"/>
+        <circle cx="74" cy="58" r="6.5" fill="#97A081"/>
+        <circle cx="846" cy="58" r="6.5" fill="#2A3723"/>
+        <text x="68" y="90" fill="#2A3723" font-family="Inter, sans-serif" font-size="15.5" font-weight="500">Tui<tspan fill="#8b9183" font-weight="400"> · Portugal</tspan></text>
+        <text x="852" y="90" text-anchor="end" fill="#2A3723" font-family="Inter, sans-serif" font-size="15.5" font-weight="500">Santiago<tspan fill="#8b9183" font-weight="400"> · Spain</tspan></text>
+      </svg>
+    </div>
+  </section>
+
+  <!-- 4 · MIND -->
+  <section class="slide dark">
+    <div class="mark"><svg viewBox="0 0 970.79 511.74"><use href="#logomark"/></svg><span>back to being</span></div>
+    <div class="inner reveal">
+      <div class="eyebrow">Why MIND</div>
+      <h2 class="xl">MIND is the whole <span class="it">point.</span></h2>
+      <p class="lead">Stichting MIND is a Dutch organisation for mental wellbeing. We build an app for them, so young people find the foundation more easily and reach for it every day. <span class="em">The more they use it, the further MIND's impact reaches.</span></p>
+      <div class="kicker" style="color:var(--sky)">The walk ends. The app keeps going.</div>
+    </div>
+  </section>
+
+  <!-- 5 · THE STORY -->
+  <section class="slide">
+    <div class="mark"><svg viewBox="0 0 970.79 511.74"><use href="#logomark"/></svg><span>back to being</span></div>
+    <div class="inner reveal">
+      <div class="eyebrow">The story</div>
+      <h2 class="xl">A story worth <span class="it">telling.</span></h2>
+      <p class="lead">We film a short documentary and tell the real story on social, the good days and the hard ones. <span class="em">We want it seen.</span> A walk this different, building something that genuinely helps people, is how we earn organic press and get a generation talking about mental health.</p>
+      <div class="kicker">A story to be part of, from the first step.</div>
+    </div>
+  </section>
+
+  <!-- 6 · THE PARTNERSHIP -->
+  <section class="slide">
+    <div class="mark"><svg viewBox="0 0 970.79 511.74"><use href="#logomark"/></svg><span>back to being</span></div>
+    <div class="inner reveal">
+      <div class="eyebrow">The partnership</div>
+      <h2>What we need, and what you <span class="it">get.</span></h2>
+      <p class="lead">We're building toward the same future as Wispr: one where your voice, not a keyboard, is how you work. So the ask is simple.</p>
+      <div class="duo">
+        <div class="blk"><div class="lbl">What we need</div><div class="txt">Budget for the tools and gear to build, film and document the journey.</div></div>
+        <div class="blk"><div class="lbl">What you get</div><div class="txt">You carry the concept as our partner, woven through the documentary and the story we tell on social. A role in the story, not a logo on a screen.</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7 · CLOSE -->
+  <section class="slide tree dark">
+    <div class="inner reveal">
+      <div class="eyebrow">Let's build</div>
+      <h2 class="xl">Come build with us. <span class="it">Back to being.</span></h2>
+      <p class="lead">Help us fund the walk, the tool and the film. We'll make something worth being part of.</p>
+      <div class="links">
+        <a class="lead-link" href="mailto:caesar@backtobeing.tech">caesar@backtobeing.tech</a>
+        <a href="tel:+31683032377">+31 6 83032377</a>
+        <a href="https://backtobeing.tech">backtobeing.tech</a>
+      </div>
+      <div class="brandlock" style="margin-top:clamp(36px,4.5vw,58px);"><svg viewBox="0 0 970.79 511.74"><use href="#logomark"/></svg><span class="wm">back to being</span></div>
+    </div>
+  </section>
+
+</div>
+
+<nav class="nav">
+  <button id="prev" aria-label="Previous slide"><svg><use href="#arrowL"/></svg></button>
+  <button id="next" aria-label="Next slide"><svg><use href="#arrowR"/></svg></button>
+</nav>
+<div id="counter">01 / 07</div>
+
+<script>
+  const track=document.getElementById('track');
+  const slides=[...document.querySelectorAll('.slide')];
+  const progress=document.getElementById('progress');
+  const counter=document.getElementById('counter');
+  const prevBtn=document.getElementById('prev');
+  const nextBtn=document.getElementById('next');
+  let i=0;
+  const pad2=n=>String(n).padStart(2,'0');
+  function update(){
+    track.style.transform='translateX(-'+(i*100)+'vw)';
+    progress.style.width=(i/(slides.length-1)*100)+'%';
+    counter.textContent=pad2(i+1)+' / '+pad2(slides.length);
+    slides.forEach((s,k)=>s.classList.toggle('active',k===i));
+    prevBtn.disabled=(i===0); nextBtn.disabled=(i===slides.length-1);
+  }
+  function go(n){ i=Math.max(0,Math.min(slides.length-1,n)); update(); }
+  window.addEventListener('keydown',e=>{
+    if(['ArrowRight','PageDown',' ','Enter'].includes(e.key)){e.preventDefault();go(i+1);}
+    else if(['ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();go(i-1);}
+    else if(e.key==='Home'){e.preventDefault();go(0);}
+    else if(e.key==='End'){e.preventDefault();go(slides.length-1);}
+  });
+  nextBtn.addEventListener('click',()=>go(i+1));
+  prevBtn.addEventListener('click',()=>go(i-1));
+  let x0=null;
+  window.addEventListener('touchstart',e=>{x0=e.touches[0].clientX;},{passive:true});
+  window.addEventListener('touchend',e=>{ if(x0===null)return; const dx=e.changedTouches[0].clientX-x0; if(Math.abs(dx)>50){go(dx<0?i+1:i-1);} x0=null; },{passive:true});
+  update();
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
+<script>
+  (function(){
+    var intro=document.getElementById('intro');
+    function endIntro(){ if(!intro) return; intro.classList.add('hide'); var n=intro; intro=null; setTimeout(function(){ if(n&&n.parentNode) n.parentNode.removeChild(n); }, 700); }
+    if(typeof lottie==='undefined'){ endIntro(); return; }
+    try{
+      var anim=lottie.loadAnimation({ container:document.getElementById('introAnim'), renderer:'svg', loop:false, autoplay:true, path:'logo-animation.json' });
+      anim.setSpeed(1);
+      anim.addEventListener('data_failed', endIntro);
+      setTimeout(endIntro, 3000);
+    }catch(e){ endIntro(); }
+  })();
+</script>
+</body>
+</html>
